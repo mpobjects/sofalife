@@ -33,7 +33,7 @@ public class XmlConverterTest {
 
 	@Before
 	public void setUp() throws Exception {
-		InputStream is = XmlConverterTest.class.getResourceAsStream("/geodis-pb-manifest.xml");
+		InputStream is = XmlConverterTest.class.getResourceAsStream("/example-spec.xml");
 		FormatSpec spec = new SpecLoader().load(is);
 		xmlConverter = new XmlConverter(spec);
 	}
@@ -42,7 +42,7 @@ public class XmlConverterTest {
 	public void test() throws Exception {
 		StringWriter output = new StringWriter();
 		long time = System.currentTimeMillis();
-		xmlConverter.convert(XmlConverterTest.class.getResourceAsStream("/geodis-pb-manifest.txt"), output);
+		xmlConverter.convert(XmlConverterTest.class.getResourceAsStream("/example-spec.txt"), output);
 		time = System.currentTimeMillis() - time;
 		LOG.info("Manifest parsed in {}ms", time);
 		Assert.assertTrue(output.toString().length() > 0);
@@ -53,17 +53,16 @@ public class XmlConverterTest {
 
 		XPathFactory xpathfact = XPathFactory.newInstance();
 		XPath xpath = xpathfact.newXPath();
-		Assert.assertEquals("TPBI0951026SE128QF0",
-				xpath.evaluate("/VARIABLE_FIXED_LENGTH_FORMAT/A11/B01/B10[ORDERREFERENCENO='OREUSU2215533931GB']/TRACKINGNUMBER/text()", doc));
+		Assert.assertEquals("EUR", xpath.evaluate("/example/REC/item[item-id='0002']/measurement[type='value']/unit/text()", doc));
 
-		Assert.assertEquals("1", xpath.evaluate("count(/VARIABLE_FIXED_LENGTH_FORMAT/Z10)", doc));
+		Assert.assertEquals("1", xpath.evaluate("count(/example/footer)", doc));
 	}
 
 	@Test
 	public void testBom() throws Exception {
 		StringWriter output = new StringWriter();
 		long time = System.currentTimeMillis();
-		xmlConverter.convert(XmlConverterTest.class.getResourceAsStream("/geodis-pb-manifest-bom.txt"), output);
+		xmlConverter.convert(XmlConverterTest.class.getResourceAsStream("/example-spec-bom.txt"), output);
 		time = System.currentTimeMillis() - time;
 		LOG.info("Manifest parsed in {}ms", time);
 		Assert.assertTrue(output.toString().length() > 0);
@@ -74,10 +73,9 @@ public class XmlConverterTest {
 
 		XPathFactory xpathfact = XPathFactory.newInstance();
 		XPath xpath = xpathfact.newXPath();
-		Assert.assertEquals("TPBI0951026SE128QF0",
-				xpath.evaluate("/VARIABLE_FIXED_LENGTH_FORMAT/A11/B01/B10[ORDERREFERENCENO='OREUSU2215533931GB']/TRACKINGNUMBER/text()", doc));
+		Assert.assertEquals("EUR", xpath.evaluate("/example/REC/item[item-id='0002']/measurement[type='value']/unit/text()", doc));
 
-		Assert.assertEquals("1", xpath.evaluate("count(/VARIABLE_FIXED_LENGTH_FORMAT/Z10)", doc));
+		Assert.assertEquals("1", xpath.evaluate("count(/example/footer)", doc));
 	}
 
 	@Test
@@ -86,7 +84,7 @@ public class XmlConverterTest {
 		try {
 			// don't allow blank lines
 			xmlConverter.setProcessingMode(ProcessingMode.STRICT);
-			xmlConverter.convert(XmlConverterTest.class.getResourceAsStream("/geodis-pb-manifest.txt"), output);
+			xmlConverter.convert(XmlConverterTest.class.getResourceAsStream("/example-spec.txt"), output);
 			Assert.fail("No exception thrown");
 		} catch (ConverterException e) {
 			LOG.info("Excepted exception: " + e.getMessage(), e);
@@ -101,12 +99,12 @@ public class XmlConverterTest {
 		try {
 			// don't allow blank lines
 			xmlConverter.setProcessingMode(ProcessingMode.VERY_STRICT);
-			xmlConverter.convert(XmlConverterTest.class.getResourceAsStream("/geodis-pb-manifest.txt"), output);
+			xmlConverter.convert(XmlConverterTest.class.getResourceAsStream("/example-spec.txt"), output);
 			Assert.fail("No exception thrown");
 		} catch (ConverterException e) {
 			LOG.info("Excepted exception: " + e.getMessage(), e);
 			// should fail on the first blank line
-			Assert.assertEquals(5, e.getLineNumber());
+			Assert.assertEquals(2, e.getLineNumber());
 		}
 	}
 }

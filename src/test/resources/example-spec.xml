@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<format encoding="utf-8" id="com:mpobjects:sofalife:example" name="example" version="1.0" xmlns="http://system.mp-objects.com/schemas/sofalife"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://system.mp-objects.com/schemas/sofalife ../../main/resources/sofalife.xsd">
+
+	<description>Example specification to show off sofalife</description>
+
+	<record qualifier="AAA" name="header" multiplicity="1">
+		<field length="8" name="message-id" />
+		<field length="8" name="date" />
+		<field length="6" name="time" />
+		<field length="5" name="sender" />
+	</record>
+
+	<record qualifier="REC">
+		<field length="8" name="record-id" />
+
+		<record qualifier="LOC" name="location" multiplicity="2">
+			<description>Sender/Receiver information</description>
+			<field length="1" name="type" />
+			<field length="20" name="name" />
+			<field length="20" name="address" />
+			<field length="20" name="city" />
+			<field length="20" name="country" />
+		</record>
+
+		<record qualifier="ITM" name="item">
+			<field length="4" name="item-id" />
+			<field length="20" name="name" />
+			<field length="5" name="count" />
+			<field length="60" name="description" optional="true" />
+
+			<record qualifier="MEA" name="measurement" multiplicity="*">
+				<field length="10" name="type" />
+				<field length="10" name="value" />
+				<field length="3" name="unit" />
+			</record>
+		</record>
+	</record>
+
+	<record qualifier="ZZZ" name="footer" multiplicity="1">
+		<field length="4" name="count" />
+		<field length="1" name="endbit" />
+	</record>
+
+</format>

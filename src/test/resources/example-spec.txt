@@ -1,0 +1,16 @@
+AAAMsgABCDE20160607161154TestR
+
+REC12345678
+LOCSSender Name________.Streetname 123_____.Cityname___________.Countryname________.
+LOCRReceiver Name       Somestreet 42       Nowhere             Countryname         
+ITM0001Product #2          12   
+ITM0002Best Product_______.4___.This is the best product ©2016 Organization. Inc___________.
+MEAweight___.123.788__.KG.
+MEAvolume    3.000     M3 
+MEAvalue     1234.67   EUR
+
+
+ZZZ0000X
+
+
+XXX strict will fail here, very strict did not even reach it XXX

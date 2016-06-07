@@ -16,8 +16,8 @@ import com.mpobjects.formats.sofalife.spec.FormatSpec;
 public class SpecLoaderTest {
 
 	@Test
-	public void testGeodisPbManifest() throws Exception {
-		InputStream is = SpecLoaderTest.class.getResourceAsStream("/geodis-pb-manifest.xml");
+	public void testSpecLoader() throws Exception {
+		InputStream is = SpecLoaderTest.class.getResourceAsStream("/example-spec.xml");
 		SpecLoader ldr = new SpecLoader();
 		FormatSpec spec = ldr.load(is);
 		Assert.assertNotNull(spec);
