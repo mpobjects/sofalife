@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<format encoding="utf-16" id="sofalife:test:utf16" name="TEST" version="1.0"
+	xmlns="http://system.mp-objects.com/schemas/sofalife" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://system.mp-objects.com/schemas/sofalife ../../main/resources/sofalife.xsd ">
+	<description>Test specification for UTF-16 input</description>
+
+	<record qualifier="RECORD" multiplicity="1..*">
+		<field length="10" name="DATA" />
+	</record>
+</format>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://system.mp-objects.com/schemas/sofalife" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:sl="http://system.mp-objects.com/schemas/sofalife">
+
+    <element name="format" type="sl:Format"></element>
+
+    <complexType name="Record">
+    	<annotation>
+    		<documentation>A single record.</documentation>
+    	</annotation>
+    	<sequence>
+    		<element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="field" type="sl:Field" maxOccurs="unbounded" minOccurs="0"></element>
+    		<element name="record" type="sl:Record" maxOccurs="unbounded" minOccurs="0">
+    			<annotation>
+    				<documentation>Nested records.</documentation>
+    			</annotation>
+    		</element>
+    	</sequence>
+    	<attribute name="qualifier" type="string" use="required">
+    		<annotation>
+    			<documentation>
+    				The identifier for the record. The start of the read content must match this identifier.
+    			</documentation>
+    		</annotation>
+    	</attribute>
+    	<attribute name="multiplicity" type="string" default="1..*">
+    		<annotation>
+    			<documentation>Is this element optional.</documentation>
+    		</annotation>
+    	</attribute>
+    	<attribute name="name" type="NCName">
+    		<annotation>
+    			<documentation>Used to generate the XML element with. If not used the identifier value will be normalized to be a value NCName.</documentation>
+    		</annotation></attribute>
+    </complexType>
+
+    <complexType name="Field">
+    	<sequence>
+    		<element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    	<attribute name="name" type="NCName" use="required">
+    		<annotation>
+    			<documentation>The name of this field. Will be used to generate the XML element with.</documentation>
+    		</annotation></attribute>
+    	<attribute name="length" type="int" use="required">
+    		<annotation>
+    			<documentation>The length of the field.</documentation>
+    		</annotation></attribute>
+    	<attribute name="optional" type="boolean" default="false">
+    		<annotation>
+    			<documentation>Defines if this field is optional. If this field is optional and not present, then all additional fields will be ignored as well. Thus all subsequent fields will automatically be made optional.</documentation>
+    		</annotation></attribute>
+    </complexType>
+
+    <complexType name="Format">
+    	<sequence>
+    		<element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="record" type="sl:Record" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    	<attribute name="version" type="string"></attribute>
+    	<attribute name="id" type="Name">
+    		<annotation>
+    			<documentation>The identifier for this format.</documentation>
+    		</annotation>
+    	</attribute>
+    	<attribute name="encoding" type="NCName">
+    		<annotation>
+    			<documentation>Input character encoding.</documentation>
+    		</annotation>
+    	</attribute>
+    	<attribute name="name" type="NCName" use="optional">
+    		<annotation>
+    			<documentation>The name of the root element.</documentation>
+    		</annotation></attribute>
+    </complexType>
+</schema>
