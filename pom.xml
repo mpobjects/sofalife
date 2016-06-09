@@ -5,7 +5,8 @@
 	<version>0.4.1-SNAPSHOT</version>
 	<name>SoFaLiFe</name>
 	<description>Reader for Structured Fixed Length Formats.</description>
-  <url>https://github.com/mpobjects/sofalife</url>
+	<url>https://github.com/mpobjects/sofalife</url>
+	<inceptionYear>2014</inceptionYear>
 	<organization>
 		<name>MP Objects</name>
 		<url>http://www.mp-objects.com</url>
@@ -18,11 +19,21 @@
 		<url>https://github.com/mpobjects/sofalife/issues</url>
 		<system>GitHub</system>
 	</issueManagement>
+	<ciManagement>
+		<system>TravisCI</system>
+		<url>https://travis-ci.org/mpobjects/sofalife</url>
+	</ciManagement>
 	<properties>
 		<java-version>1.6</java-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<findbugs-version>3.0.3</findbugs-version>
 	</properties>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -118,14 +129,14 @@
 			<version>[2.0,3.0)</version>
 		</dependency>
 	</dependencies>
-  <profiles>
-    <profile>
-      <activation>
-        <jdk>1.6</jdk>
-      </activation>
-      <properties>
-		    <findbugs-version>2.5.5</findbugs-version>
-	   </properties>
-    </profile>
-  </profiles>
+	<profiles>
+		<profile>
+			<activation>
+				<jdk>1.6</jdk>
+			</activation>
+			<properties>
+				<findbugs-version>2.5.5</findbugs-version>
+			</properties>
+		</profile>
+	</profiles>
 </project>

@@ -1,4 +1,9 @@
-# sofalife [![Build Status](https://travis-ci.org/mpobjects/sofalife.svg?branch=master)](https://travis-ci.org/mpobjects/sofalife)
+[![Apache License, Version 2.0](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/mpobjects/sofalife/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/mpobjects/sofalife.svg)](https://github.com/mpobjects/sofalife/issues)
+[![Build Status](https://travis-ci.org/mpobjects/sofalife.svg?branch=master)](https://travis-ci.org/mpobjects/sofalife)
+
+# sofalife 
+
 Reader for Structured Fixed Length Formats
 
 Sofalife is a Java library to process text files which have a structured fixed length format. Fixed length files are column based, like CSV. In some cases a file is used where lines can have different record types with different definitions, and possibly a hierarchy in elements. Standard fixed length parsers are therefor not usable to process these file.
