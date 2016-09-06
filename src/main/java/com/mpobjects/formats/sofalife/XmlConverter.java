@@ -13,8 +13,6 @@ import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.List;
 
-import javanet.staxutils.IndentingXMLStreamWriter;
-
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -30,6 +28,8 @@ import com.mpobjects.formats.sofalife.spec.RecordSpec;
 import com.mpobjects.formats.sofalife.util.ByteOrderUtils;
 import com.mpobjects.formats.sofalife.util.NullWriter;
 
+import javanet.staxutils.IndentingXMLStreamWriter;
+
 /**
  * Reads the structured fixed length format and produces an XML according to the provided specification.
  */
@@ -40,10 +40,13 @@ public class XmlConverter {
 	protected class ConverterState {
 		protected String currentLine;
 
+		protected boolean procComments;
+
 		protected LineNumberReader reader;
 
 		public ConverterState(Reader aReader) {
 			reader = new LineNumberReader(aReader);
+			procComments = !StringUtils.isBlank(formatSpec.getCommentPrefix());
 		}
 
 		public String getCurrentLine() {
@@ -57,6 +60,10 @@ public class XmlConverter {
 		public String nextLine() throws IOException {
 			do {
 				currentLine = reader.readLine();
+				if (procComments && StringUtils.startsWith(currentLine, formatSpec.getCommentPrefix())) {
+					// ignore comments
+					continue;
+				}
 				if (processingMode == ProcessingMode.VERY_STRICT) {
 					// do not skip blank lines
 					break;
@@ -181,8 +188,8 @@ public class XmlConverter {
 					return;
 				}
 				if (processingMode == ProcessingMode.STRICT || processingMode == ProcessingMode.VERY_STRICT) {
-					throw new ConverterException(aLineNumber, String.format("Missing required field %s in record %s. On line %d.", field.getName(),
-							aRec.getQualifier(), aLineNumber));
+					throw new ConverterException(aLineNumber,
+							String.format("Missing required field %s in record %s. On line %d.", field.getName(), aRec.getQualifier(), aLineNumber));
 				}
 			}
 			String value;
@@ -231,8 +238,8 @@ public class XmlConverter {
 		aWriter.writeEndElement();
 	}
 
-	protected void processRecords(ConverterState aState, XMLStreamWriter aWriter, List<RecordSpec> aRecords) throws ConverterException, XMLStreamException,
-			IOException {
+	protected void processRecords(ConverterState aState, XMLStreamWriter aWriter, List<RecordSpec> aRecords)
+			throws ConverterException, XMLStreamException, IOException {
 		if (aRecords.isEmpty()) {
 			// nothing to do
 			return;
@@ -252,8 +259,8 @@ public class XmlConverter {
 				++recCount;
 			} else {
 				if (currentRec.getMinOccurance() > 0 && recCount < currentRec.getMinOccurance()) {
-					throw new ConverterException(aState.getLineNumber(), String.format("Read %d records of %s, but expected at least %d. At line %d.",
-							recCount, currentRec.getQualifier(), currentRec.getMinOccurance(), aState.getLineNumber()));
+					throw new ConverterException(aState.getLineNumber(), String.format("Read %d records of %s, but expected at least %d. At line %d.", recCount,
+							currentRec.getQualifier(), currentRec.getMinOccurance(), aState.getLineNumber()));
 				}
 				if (records.hasNext()) {
 					currentRec = records.next();

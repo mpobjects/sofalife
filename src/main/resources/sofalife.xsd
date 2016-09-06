@@ -71,6 +71,8 @@
     	<attribute name="name" type="NCName" use="optional">
     		<annotation>
     			<documentation>The name of the root element.</documentation>
-    		</annotation></attribute>
+    		</annotation>
+    	</attribute>
+    	<attribute name="comment-prefix" type="string"></attribute>
     </complexType>
 </schema>

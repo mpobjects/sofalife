@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mpobjects.formats</groupId>
 	<artifactId>sofalife</artifactId>
-	<version>0.4.1-SNAPSHOT</version>
+	<version>0.5.0-SNAPSHOT</version>
 	<name>SoFaLiFe</name>
 	<description>Reader for Structured Fixed Length Formats.</description>
 	<url>https://github.com/mpobjects/sofalife</url>

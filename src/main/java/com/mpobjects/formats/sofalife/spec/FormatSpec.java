@@ -15,6 +15,8 @@ import com.mpobjects.formats.sofalife.util.Utils;
  * Specification of a structured fixed length format.
  */
 public class FormatSpec {
+	protected String commentPrefix;
+
 	protected String description;
 
 	protected Charset encoding;
@@ -33,6 +35,15 @@ public class FormatSpec {
 		setName("sofalife");
 		setId("urn:sofalife:specification:unknown");
 		setVersion("0.1");
+	}
+
+	/**
+	 * The prefix of a line indicating a comment. If blank comments are not supported.
+	 *
+	 * @return the commentPrefix
+	 */
+	public String getCommentPrefix() {
+		return commentPrefix;
 	}
 
 	/**
@@ -59,7 +70,7 @@ public class FormatSpec {
 	/**
 	 * Name of the record, this will be used as element name in the generated XML. Should conform to the NCName XML data
 	 * type.
-	 * 
+	 *
 	 * @return
 	 */
 	public String getName() {
@@ -68,7 +79,7 @@ public class FormatSpec {
 
 	/**
 	 * Root records defined in the file.
-	 * 
+	 *
 	 * @return
 	 */
 	public List<RecordSpec> getRecords() {
@@ -77,11 +88,19 @@ public class FormatSpec {
 
 	/**
 	 * Version of the specification.
-	 * 
+	 *
 	 * @return
 	 */
 	public String getVersion() {
 		return version;
+	}
+
+	/**
+	 * @param aCommentPrefix
+	 *            the commentPrefix to set
+	 */
+	public void setCommentPrefix(String aCommentPrefix) {
+		commentPrefix = aCommentPrefix;
 	}
 
 	public void setDescription(String aDescription) {

@@ -31,6 +31,8 @@ public class SpecLoader {
 
 	public static final String NAMESPACE = "http://system.mp-objects.com/schemas/sofalife";
 
+	private static final String ATTR_COMMENT_PREFIX = "comment-prefix";
+
 	private static final String ATTR_ENCODING = "encoding";
 
 	private static final String ATTR_ID = "id";
@@ -133,6 +135,21 @@ public class SpecLoader {
 		return vals;
 	}
 
+	protected String readDescriptionElement(String aElementName, XMLStreamReader aReader) throws XMLStreamException {
+		StringBuilder sb = new StringBuilder();
+		while (aReader.hasNext()) {
+			int event = aReader.next();
+			if (event == XMLStreamConstants.END_ELEMENT && inNamespace(aReader)) {
+				if (aElementName.equals(aReader.getLocalName())) {
+					break;
+				}
+			} else if (event == XMLStreamConstants.CDATA || event == XMLStreamConstants.CHARACTERS || event == XMLStreamConstants.SPACE) {
+				sb.append(aReader.getText());
+			}
+		}
+		return StringUtils.defaultIfBlank(sb.toString(), null);
+	}
+
 	protected FieldSpec readFieldElement(String aElementName, XMLStreamReader aReader) throws SpecificationException, XMLStreamException {
 		FieldSpec spec = new FieldSpec(aReader.getAttributeValue(null, ATTR_NAME), NumberUtils.toInt(aReader.getAttributeValue(null, ATTR_LENGTH), 0));
 
@@ -180,6 +197,11 @@ public class SpecLoader {
 			spec.setId(val);
 		}
 
+		val = aReader.getAttributeValue(null, ATTR_COMMENT_PREFIX);
+		if (!StringUtils.isBlank(val)) {
+			spec.setCommentPrefix(val);
+		}
+
 		while (aReader.hasNext()) {
 			int event = aReader.next();
 			if (event == XMLStreamConstants.START_ELEMENT && inNamespace(aReader)) {
@@ -188,6 +210,8 @@ public class SpecLoader {
 					if (record != null) {
 						spec.getRecords().add(record);
 					}
+				} else if (ELM_DESCRIPTION.equals(aReader.getLocalName())) {
+					spec.setDescription(readDescriptionElement(ELM_DESCRIPTION, aReader));
 				}
 			} else if (event == XMLStreamConstants.END_ELEMENT && inNamespace(aReader)) {
 				if (aElementName.equals(aReader.getLocalName())) {
@@ -235,6 +259,8 @@ public class SpecLoader {
 					if (record != null) {
 						spec.getRecords().add(record);
 					}
+				} else if (ELM_DESCRIPTION.equals(aReader.getLocalName())) {
+					spec.setDescription(readDescriptionElement(ELM_DESCRIPTION, aReader));
 				}
 			} else if (event == XMLStreamConstants.END_ELEMENT && inNamespace(aReader)) {
 				if (aElementName.equals(aReader.getLocalName())) {

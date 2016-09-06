@@ -14,6 +14,8 @@ import com.mpobjects.formats.sofalife.util.Utils;
  * A record in the format.
  */
 public class RecordSpec {
+	protected String description;
+
 	protected List<FieldSpec> fields;
 
 	protected int maxOccurance;
@@ -35,6 +37,10 @@ public class RecordSpec {
 		setName(Utils.convertToNCName(aQualifier));
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
 	/**
 	 * @return fields defined in this record.
 	 */
@@ -44,7 +50,7 @@ public class RecordSpec {
 
 	/**
 	 * The maximum subsequent occurrences of this record. If -1 there is no maximum.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getMaxOccurance() {
@@ -53,7 +59,7 @@ public class RecordSpec {
 
 	/**
 	 * The minimum number of occurences of this record. If -1 there is no minimum.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getMinOccurance() {
@@ -63,7 +69,7 @@ public class RecordSpec {
 	/**
 	 * Name of the record, this will be used as element name in the generated XML. Should conform to the NCName XML data
 	 * type.
-	 * 
+	 *
 	 * @return
 	 */
 	public String getName() {
@@ -72,7 +78,7 @@ public class RecordSpec {
 
 	/**
 	 * The leading sequence of characters which defines this type of record.
-	 * 
+	 *
 	 * @return
 	 */
 	public String getQualifier() {
@@ -84,6 +90,10 @@ public class RecordSpec {
 	 */
 	public List<RecordSpec> getRecords() {
 		return records;
+	}
+
+	public void setDescription(String aDescription) {
+		description = aDescription;
 	}
 
 	public void setFields(List<FieldSpec> aFields) {
