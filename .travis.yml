@@ -5,5 +5,8 @@ jdk:
   - openjdk7
   - oraclejdk8
 
+before_install:
+  - rm ~/.m2/settings.xml
+
 script:
   - mvn test findbugs:check
