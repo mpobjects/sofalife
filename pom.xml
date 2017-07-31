@@ -136,7 +136,7 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>[3.0,4.0)</version>
+			<version>[3.0,3.6)</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -179,6 +179,7 @@
 			</activation>
 			<properties>
 				<findbugs-version>2.5.5</findbugs-version>
+				<maven-bundle-plugin>2.5.4</maven-bundle-plugin>
 			</properties>
 		</profile>
 		<profile>
