@@ -346,4 +346,16 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
+
+	<developers>
+		<developer>
+			<name>Michiel Hendriks</name>
+			<email>michiel.hendriks@mp-objects.com</email>
+			<organization>MP Objects</organization>
+			<organizationUrl>http://www.mp-objects.com</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
 </project>
