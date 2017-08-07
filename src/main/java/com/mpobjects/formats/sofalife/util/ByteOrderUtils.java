@@ -81,6 +81,7 @@ public class ByteOrderUtils {
 	 * @param aEncoding
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	static ByteOrderMark[] getByteOrderMarks(Charset aEncoding) {
 		if (aEncoding == null) {
 			return null;
