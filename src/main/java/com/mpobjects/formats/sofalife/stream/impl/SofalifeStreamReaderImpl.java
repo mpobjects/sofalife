@@ -8,6 +8,7 @@ import java.io.InputStream;
 import com.mpobjects.formats.sofalife.spec.FieldSpec;
 import com.mpobjects.formats.sofalife.spec.FormatSpec;
 import com.mpobjects.formats.sofalife.spec.RecordSpec;
+import com.mpobjects.formats.sofalife.stream.SofalifeStreamEventType;
 import com.mpobjects.formats.sofalife.stream.SofalifeStreamReader;
 
 /**
@@ -20,9 +21,9 @@ public class SofalifeStreamReaderImpl implements SofalifeStreamReader {
 	}
 
 	@Override
-	public int getEventType() {
+	public SofalifeStreamEventType getEventType() {
 		// TODO Auto-generated method stub
-		return 0;
+		return SofalifeStreamEventType.UNDEFINED;
 	}
 
 	@Override
@@ -56,9 +57,9 @@ public class SofalifeStreamReaderImpl implements SofalifeStreamReader {
 	}
 
 	@Override
-	public int next() {
+	public SofalifeStreamEventType next() {
 		// TODO Auto-generated method stub
-		return 0;
+		return SofalifeStreamEventType.UNDEFINED;
 	}
 
 }

@@ -9,18 +9,19 @@ import com.mpobjects.formats.sofalife.spec.RecordSpec;
 /**
  * A StAX-like reader of sofalife files.
  */
-public interface SofalifeStreamReader extends SofalifeStreamConstants {
+public interface SofalifeStreamReader {
 	/**
 	 * Return the current event type
 	 *
 	 * @return the current event type
 	 */
-	int getEventType();
+	SofalifeStreamEventType getEventType();
 
 	/**
 	 * Return the current {@link FieldSpec}. Only valid for field events.
 	 *
 	 * @return the active {@link FieldSpec}
+	 * @throws IllegalStateException
 	 */
 	FieldSpec getFieldSpec();
 
@@ -36,6 +37,7 @@ public interface SofalifeStreamReader extends SofalifeStreamConstants {
 	 * Return the current {@link RecordSpec}. Only valid for record and field events.
 	 *
 	 * @return the active {@link RecordSpec}
+	 * @throws IllegalStateException
 	 */
 	RecordSpec getRecordSpec();
 
@@ -44,6 +46,7 @@ public interface SofalifeStreamReader extends SofalifeStreamConstants {
 	 * For a comment event is returns the comment without the defined prefix.
 	 *
 	 * @return the text value
+	 * @throws IllegalStateException
 	 */
 	String getText();
 
@@ -56,6 +59,8 @@ public interface SofalifeStreamReader extends SofalifeStreamConstants {
 	 * Return the next event
 	 *
 	 * @return the event type read
+	 * @throws IllegalStateException
+	 *             when there is no next
 	 */
-	int next();
+	SofalifeStreamEventType next();
 }
