@@ -3,6 +3,8 @@
  */
 package com.mpobjects.formats.sofalife.stream;
 
+import javax.xml.stream.Location;
+
 import com.mpobjects.formats.sofalife.spec.FieldSpec;
 import com.mpobjects.formats.sofalife.spec.RecordSpec;
 
@@ -63,4 +65,6 @@ public interface SofalifeStreamReader {
 	 *             when there is no next
 	 */
 	SofalifeStreamEventType next();
+	
+	Location getLocation();
 }

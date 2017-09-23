@@ -16,5 +16,16 @@ public abstract class SofalifeInputFactory {
 		return new SofalifeInputFactoryImpl();
 	}
 
-	public abstract SofalifeStreamReader createStreamReader(FormatSpec aFormatSpec, InputStream aInputStream);
+	/**
+	 * Create a new stream reader
+	 * 
+	 * @param aFormatSpec
+	 * @param aInputStream
+	 * @return
+	 * @throws SofalifeStreamException
+	 *             Thrown if there is an issue opening the stream
+	 * @throws NullPointerException
+	 *             Thrown if either of the arguments is null
+	 */
+	public abstract SofalifeStreamReader createStreamReader(FormatSpec aFormatSpec, InputStream aInputStream) throws SofalifeStreamException;
 }

@@ -3,21 +3,57 @@
  */
 package com.mpobjects.formats.sofalife.stream.impl;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
+
+import javax.xml.stream.Location;
+
+import org.apache.commons.lang3.Validate;
 
 import com.mpobjects.formats.sofalife.spec.FieldSpec;
 import com.mpobjects.formats.sofalife.spec.FormatSpec;
 import com.mpobjects.formats.sofalife.spec.RecordSpec;
 import com.mpobjects.formats.sofalife.stream.SofalifeStreamEventType;
+import com.mpobjects.formats.sofalife.stream.SofalifeStreamException;
 import com.mpobjects.formats.sofalife.stream.SofalifeStreamReader;
+import com.mpobjects.formats.sofalife.util.ByteOrderUtils;
 
 /**
  *
  */
 public class SofalifeStreamReaderImpl implements SofalifeStreamReader {
 
-	public SofalifeStreamReaderImpl(FormatSpec aFormatSpec, InputStream aInputStream) {
-		// TODO Auto-generated constructor stub
+	protected final FormatSpec formatSpec;
+
+	protected final Reader inputReader;
+
+	protected LocationImpl location;
+
+	public SofalifeStreamReaderImpl(FormatSpec aFormatSpec, InputStream aInputStream) throws SofalifeStreamException {
+		Validate.notNull(aFormatSpec, "FormatSpec cannot be null");
+		Validate.notNull(aInputStream, "InputStream cannot be null");
+		formatSpec = aFormatSpec;
+		location = new LocationImpl(formatSpec.getId(), null);
+		inputReader = getReader(aInputStream);
+	}
+
+	protected Reader getReader(InputStream aInputStream) throws SofalifeStreamException {
+		Charset charset = formatSpec.getEncoding();
+		aInputStream = ByteOrderUtils.getInputStream(aInputStream, charset);
+		try {
+			charset = ByteOrderUtils.correctCharset(aInputStream, charset);
+		} catch (IOException e) {
+			throw new SofalifeStreamException("I/O Exception reading stream.", e);
+		}
+		return new InputStreamReader(aInputStream, charset);
+	}
+
+	@Override
+	public Location getLocation() {
+		return location;
 	}
 
 	@Override

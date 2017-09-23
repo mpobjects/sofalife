@@ -8,6 +8,8 @@ Reader for Structured Fixed Length Formats
 
 Sofalife is a Java library to process text files which have a structured fixed length format. Fixed length files are column based, like CSV. In some cases a file is used where lines can have different record types with different definitions, and possibly a hierarchy in elements. Standard fixed length parsers are therefor not usable to process these file.
 
+This library only exist in order to cope with these kinds of horrible formats. Please do not define your own format which can be handled by this library, make use of the various properly structured text formats like XML, JSON, or YAML.
+
 
 ## Format Specification
 

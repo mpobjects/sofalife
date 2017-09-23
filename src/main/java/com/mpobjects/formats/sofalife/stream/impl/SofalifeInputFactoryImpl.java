@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 import com.mpobjects.formats.sofalife.spec.FormatSpec;
 import com.mpobjects.formats.sofalife.stream.SofalifeInputFactory;
+import com.mpobjects.formats.sofalife.stream.SofalifeStreamException;
 import com.mpobjects.formats.sofalife.stream.SofalifeStreamReader;
 
 /**
@@ -15,7 +16,7 @@ import com.mpobjects.formats.sofalife.stream.SofalifeStreamReader;
 public class SofalifeInputFactoryImpl extends SofalifeInputFactory {
 
 	@Override
-	public SofalifeStreamReader createStreamReader(FormatSpec aFormatSpec, InputStream aInputStream) {
+	public SofalifeStreamReader createStreamReader(FormatSpec aFormatSpec, InputStream aInputStream) throws SofalifeStreamException {
 		return new SofalifeStreamReaderImpl(aFormatSpec, aInputStream);
 	}
 
