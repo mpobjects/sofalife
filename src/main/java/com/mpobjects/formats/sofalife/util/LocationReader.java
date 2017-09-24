@@ -12,7 +12,7 @@ import javax.xml.stream.Location;
  */
 public class LocationReader extends BufferedReader {
 
-	protected class ReaderLocation implements Location {
+	protected static class ReaderLocation implements Location {
 		private int characterOffset;
 
 		private int columnNumber = 1;
