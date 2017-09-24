@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+	<Match>
+		<Class name="com.mpobjects.formats.sofalife.util.LocationReader" />
+		<Method name="read" />
+		<Bug pattern="SF_SWITCH_FALLTHROUGH" />
+	</Match>
+</FindBugsFilter>
