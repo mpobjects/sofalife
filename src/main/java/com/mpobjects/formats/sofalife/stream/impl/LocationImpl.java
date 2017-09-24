@@ -4,19 +4,52 @@ import javax.xml.stream.Location;
 
 public class LocationImpl implements Location {
 
+	private int characterOffset = -1;
+
+	private int columnNumber = -1;
+
+	private int lineNumber = -1;
+
 	private String publicId;
 
 	private String systemId;
 
-	private int lineNumber;
-
-	private int columnNumber;
-
-	private int characterOffset;
+	public LocationImpl(Location aLocation) {
+		publicId = aLocation.getPublicId();
+		systemId = aLocation.getSystemId();
+		lineNumber = aLocation.getLineNumber();
+		columnNumber = aLocation.getColumnNumber();
+		characterOffset = aLocation.getCharacterOffset();
+	}
 
 	public LocationImpl(String aPublicId, String aSystemId) {
 		publicId = aPublicId;
 		systemId = aSystemId;
+	}
+
+	@Override
+	public int getCharacterOffset() {
+		return characterOffset;
+	}
+
+	@Override
+	public int getColumnNumber() {
+		return columnNumber;
+	}
+
+	@Override
+	public int getLineNumber() {
+		return lineNumber;
+	}
+
+	@Override
+	public String getPublicId() {
+		return publicId;
+	}
+
+	@Override
+	public String getSystemId() {
+		return systemId;
 	}
 
 	public void setCharacterOffset(int aCharacterOffset) {
@@ -29,43 +62,6 @@ public class LocationImpl implements Location {
 
 	public void setLineNumber(int aLineNumber) {
 		lineNumber = aLineNumber;
-	}
-
-	public void incCharacterOffset(int aCharacterOffset) {
-		characterOffset += aCharacterOffset;
-	}
-
-	public void incColumnNumber(int aColumnNumber) {
-		columnNumber += aColumnNumber;
-	}
-
-	public void incLineNumber(int aLineNumber) {
-		lineNumber += aLineNumber;
-	}
-
-	@Override
-	public int getLineNumber() {
-		return lineNumber;
-	}
-
-	@Override
-	public int getColumnNumber() {
-		return columnNumber;
-	}
-
-	@Override
-	public int getCharacterOffset() {
-		return characterOffset;
-	}
-
-	@Override
-	public String getPublicId() {
-		return publicId;
-	}
-
-	@Override
-	public String getSystemId() {
-		return systemId;
 	}
 
 }

@@ -40,22 +40,6 @@ public class SofalifeStreamReaderImpl implements SofalifeStreamReader {
 		inputReader = getReader(aInputStream);
 	}
 
-	protected Reader getReader(InputStream aInputStream) throws SofalifeStreamException {
-		Charset charset = formatSpec.getEncoding();
-		aInputStream = ByteOrderUtils.getInputStream(aInputStream, charset);
-		try {
-			charset = ByteOrderUtils.correctCharset(aInputStream, charset);
-		} catch (IOException e) {
-			throw new SofalifeStreamException("I/O Exception reading stream.", e);
-		}
-		return new InputStreamReader(aInputStream, charset);
-	}
-
-	@Override
-	public Location getLocation() {
-		return location;
-	}
-
 	@Override
 	public SofalifeStreamEventType getEventType() {
 		// TODO Auto-generated method stub
@@ -66,6 +50,11 @@ public class SofalifeStreamReaderImpl implements SofalifeStreamReader {
 	public FieldSpec getFieldSpec() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Location getLocation() {
+		return location;
 	}
 
 	@Override
@@ -96,6 +85,38 @@ public class SofalifeStreamReaderImpl implements SofalifeStreamReader {
 	public SofalifeStreamEventType next() {
 		// TODO Auto-generated method stub
 		return SofalifeStreamEventType.UNDEFINED;
+	}
+
+	/**
+	 * Create an exception with optional location information
+	 * 
+	 * @param aMessage
+	 * @param aCause
+	 * @return
+	 */
+	protected SofalifeStreamException createException(String aMessage, Throwable aCause) {
+		if (location != null) {
+			return new SofalifeStreamException(aMessage, new LocationImpl(location), aCause);
+		} else {
+			return new SofalifeStreamException(aMessage, aCause);
+		}
+	}
+
+	/**
+	 * Get a suitable reader
+	 * @param aInputStream
+	 * @return
+	 * @throws SofalifeStreamException
+	 */
+	protected Reader getReader(InputStream aInputStream) throws SofalifeStreamException {
+		Charset charset = formatSpec.getEncoding();
+		aInputStream = ByteOrderUtils.getInputStream(aInputStream, charset);
+		try {
+			charset = ByteOrderUtils.correctCharset(aInputStream, charset);
+		} catch (IOException e) {
+			throw new SofalifeStreamException("I/O Exception reading stream.", e);
+		}
+		return new InputStreamReader(aInputStream, charset);
 	}
 
 }

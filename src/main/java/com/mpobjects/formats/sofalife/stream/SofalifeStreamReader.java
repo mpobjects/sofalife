@@ -28,6 +28,12 @@ public interface SofalifeStreamReader {
 	FieldSpec getFieldSpec();
 
 	/**
+	 * Get the current location information
+	 * @return location
+	 */
+	Location getLocation();
+
+	/**
 	 * Returns the name of the current element. If it is a record event is returns {@link RecordSpec#getName()}, for a
 	 * field event it returns {@link FieldSpec#getName()}. For other events it will return null.
 	 *
@@ -56,7 +62,7 @@ public interface SofalifeStreamReader {
 	 * @return true if there is more to read
 	 */
 	boolean hasNext();
-
+	
 	/**
 	 * Return the next event
 	 *
@@ -65,6 +71,4 @@ public interface SofalifeStreamReader {
 	 *             when there is no next
 	 */
 	SofalifeStreamEventType next();
-	
-	Location getLocation();
 }
