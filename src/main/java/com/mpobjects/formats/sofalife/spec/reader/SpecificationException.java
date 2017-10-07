@@ -8,6 +8,8 @@ package com.mpobjects.formats.sofalife.spec.reader;
  */
 public class SpecificationException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+
 	public SpecificationException(String aMessage) {
 		super(aMessage);
 	}

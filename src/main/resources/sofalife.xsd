@@ -23,10 +23,25 @@
     			</documentation>
     		</annotation>
     	</attribute>
-    	<attribute name="multiplicity" type="string" default="1..*">
+    	<attribute name="multiplicity" default="1..*">
     		<annotation>
-    			<documentation>Is this element optional.</documentation>
+    			<documentation>
+    				Defines how often this record can appear in a row.
+    				The multiplicity is defined by a range definition in
+    				the format: "N..M" or simply "X" which is the same
+    				as "X..X". N and M should be numbers, or an asterisk
+    				which means "undefined". The default is "1..*" mean
+    				that there should be at least 1 record. The value
+    				"1" means that there should be exact 1 record.
+    			</documentation>
     		</annotation>
+    		<simpleType>
+    			<restriction base="string">
+    				<pattern
+    					value="(([0-9]+)|\*)(\.\.(([0-9]+)|\*))?">
+    				</pattern>
+    			</restriction>
+    		</simpleType>
     	</attribute>
     	<attribute name="name" type="NCName">
     		<annotation>

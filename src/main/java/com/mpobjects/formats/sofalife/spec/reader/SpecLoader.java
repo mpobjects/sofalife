@@ -115,22 +115,29 @@ public class SpecLoader {
 		return NAMESPACE.equals(name.getNamespaceURI());
 	}
 
-	protected int[] parseMultiplicity(String aVal) {
-		if (StringUtils.isEmpty(aVal)) {
-			return null;
+	protected int[] parseMultiplicity(String aVal) throws SpecificationException {
+		if (StringUtils.isBlank(aVal)) {
+			throw new SpecificationException("Multiplicity cannot be blank");
 		}
 		aVal = aVal.trim();
-		Matcher match = Pattern.compile("([0-9*])(\\.\\.([0-9*]))?").matcher(aVal);
+		Matcher match = Pattern.compile("(([0-9]+)|\\*)(\\.\\.(([0-9]+)|\\*))?").matcher(aVal);
 		if (!match.matches()) {
-			LOG.warn("Not a valid multiplicity definition: {}", aVal);
-			return null;
+			throw new SpecificationException(String.format("Not a valid multiplicity definition: %s", aVal));
 		}
-		int[] vals = new int[] { -1, -1 };
+		int[] vals = new int[] { 0, -1 };
 		vals[0] = NumberUtils.toInt(match.group(1), -1);
-		if (match.group(3) == null) {
+		if (match.group(4) == null) {
 			vals[1] = vals[0];
 		} else {
-			vals[1] = NumberUtils.toInt(match.group(3), -1);
+			vals[1] = NumberUtils.toInt(match.group(4), -1);
+		}
+		if (vals[0] > vals[1] && vals[1] != -1) {
+			// range check
+			throw new SpecificationException(String.format("Invalid multiplicity range: %s", aVal));
+		}
+		if (vals[0] == -1) {
+			// "*" or "*..*" should be "0..*"
+			vals[0] = 0;
 		}
 		return vals;
 	}
@@ -230,13 +237,7 @@ public class SpecLoader {
 		if (val != null) {
 			spec.setName(val);
 		}
-
-		val = aReader.getAttributeValue(null, ATTR_MULTIPLICITY);
-		int[] multiplicity = parseMultiplicity(val);
-		if (multiplicity != null) {
-			spec.setMinOccurance(multiplicity[0]);
-			spec.setMaxOccurance(multiplicity[1]);
-		}
+		setMultiplicity(spec, aReader);
 
 		boolean optionalPart = false;
 
@@ -270,5 +271,23 @@ public class SpecLoader {
 		}
 
 		throw new SpecificationException("Unterminated " + aElementName + " element.");
+	}
+
+	protected void setMultiplicity(RecordSpec aSpec, XMLStreamReader aReader) throws SpecificationException {
+		String val = aReader.getAttributeValue(null, ATTR_MULTIPLICITY);
+		if (val == null) {
+			return;
+		}
+		
+		int[] multiplicity;
+		try {
+			multiplicity = parseMultiplicity(val);
+		} catch (SpecificationException e) {
+			throw new SpecificationException(String.format("Invalid multiplicity attribute for record %s", aSpec.getQualifier()), e);
+		}
+		if (multiplicity != null) {
+			aSpec.setMinOccurance(multiplicity[0]);
+			aSpec.setMaxOccurance(multiplicity[1]);
+		}
 	}
 }

@@ -15,7 +15,7 @@ public final class Utils {
 	 * Remove all values from the input to conform to the NCName requirement.
 	 *
 	 * @param aValue
-	 * @return
+	 * @return convert to a proper NCName value
 	 */
 	public static String convertToNCName(String aValue) {
 		if (aValue == null) {
@@ -28,7 +28,7 @@ public final class Utils {
 	 * Verifies if the provided value is a valid NCName value.
 	 *
 	 * @param aValue
-	 * @return
+	 * @return true if it is a valid NCName
 	 */
 	public static boolean isNCName(String aValue) {
 		if (aValue == null) {
