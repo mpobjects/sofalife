@@ -11,3 +11,4 @@ install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Dgpg.skip
 
 script:
   - mvn test findbugs:check -B
+  - mvn -B sonar:sonar -Dsonar.organization=mpobjects-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=c20ae5e072d76353560d4e0008c92a2265b7783a
