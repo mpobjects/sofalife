@@ -1,6 +1,6 @@
-[![Apache License, Version 2.0](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/mpobjects/sofalife/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/mpobjects/sofalife.svg)](https://github.com/mpobjects/sofalife/issues)
 [![Build Status](https://travis-ci.org/mpobjects/sofalife.svg?branch=master)](https://travis-ci.org/mpobjects/sofalife)
+[![Maven Central](https://img.shields.io/maven-central/v/com.mpobjects.formats/sofalife.svg)](http://www.maven.org/#search%7Cga%7C1%7Cg%3A%22com.mpobjects.formats%22%20AND%20a%3A%22sofalife%22)
+![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.mpobjects.formats/sofalife.svg)
 
 # sofalife 
 
