@@ -49,37 +49,37 @@ public class SpecLoaderTest {
 		try {
 			ldr.parseMultiplicity("test");
 			Assert.fail("Exception expected");
-		} catch (Exception e) {
+		} catch (SpecificationException e) {
 		}
 		
 		try {
 			ldr.parseMultiplicity("0..foo");
 			Assert.fail("Exception expected");
-		} catch (Exception e) {
+		} catch (SpecificationException e) {
 		}
 		
 		try {
 			ldr.parseMultiplicity("");
 			Assert.fail("Exception expected");
-		} catch (Exception e) {
+		} catch (SpecificationException e) {
 		}
 		
 		try {
 			ldr.parseMultiplicity("10..5");
 			Assert.fail("Exception expected");
-		} catch (Exception e) {
+		} catch (SpecificationException e) {
 		}
 		
 		try {
 			ldr.parseMultiplicity("**..5");
 			Assert.fail("Exception expected");
-		} catch (Exception e) {
+		} catch (SpecificationException e) {
 		}
 		
 		try {
 			ldr.parseMultiplicity("0..**");
 			Assert.fail("Exception expected");
-		} catch (Exception e) {
+		} catch (SpecificationException e) {
 		}
 	}
 

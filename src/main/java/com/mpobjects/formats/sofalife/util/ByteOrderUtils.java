@@ -6,6 +6,8 @@ package com.mpobjects.formats.sofalife.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
+import java.nio.charset.UnsupportedCharsetException;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.Charsets;
@@ -24,15 +26,15 @@ public class ByteOrderUtils {
 	static {
 		try {
 			UTF_32 = Charset.forName("UTF-32");
-		} catch (Exception e) {
+		} catch (IllegalCharsetNameException|UnsupportedCharsetException e) {
 		}
 		try {
 			UTF_32LE = Charset.forName("UTF-32LE");
-		} catch (Exception e) {
+		} catch (IllegalCharsetNameException|UnsupportedCharsetException e) {
 		}
 		try {
 			UTF_32BE = Charset.forName("UTF-32BE");
-		} catch (Exception e) {
+		} catch (IllegalCharsetNameException|UnsupportedCharsetException e) {
 		}
 	}
 
