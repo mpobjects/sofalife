@@ -24,7 +24,7 @@ public class SpecLoaderTest {
 	}
 
 	@Test
-	public void testMultiplicity() throws SpecificationException{
+	public void testMultiplicity() throws SpecificationException {
 		SpecLoader ldr = new SpecLoader();
 		int[] res = ldr.parseMultiplicity("1..*");
 		Assert.assertEquals(1, res[0]);
@@ -41,7 +41,7 @@ public class SpecLoaderTest {
 		res = ldr.parseMultiplicity("*..*");
 		Assert.assertEquals(0, res[0]);
 		Assert.assertEquals(-1, res[1]);
-		
+
 		res = ldr.parseMultiplicity("*..5");
 		Assert.assertEquals(0, res[0]);
 		Assert.assertEquals(5, res[1]);
@@ -51,31 +51,31 @@ public class SpecLoaderTest {
 			Assert.fail("Exception expected");
 		} catch (SpecificationException e) {
 		}
-		
+
 		try {
 			ldr.parseMultiplicity("0..foo");
 			Assert.fail("Exception expected");
 		} catch (SpecificationException e) {
 		}
-		
+
 		try {
 			ldr.parseMultiplicity("");
 			Assert.fail("Exception expected");
 		} catch (SpecificationException e) {
 		}
-		
+
 		try {
 			ldr.parseMultiplicity("10..5");
 			Assert.fail("Exception expected");
 		} catch (SpecificationException e) {
 		}
-		
+
 		try {
 			ldr.parseMultiplicity("**..5");
 			Assert.fail("Exception expected");
 		} catch (SpecificationException e) {
 		}
-		
+
 		try {
 			ldr.parseMultiplicity("0..**");
 			Assert.fail("Exception expected");

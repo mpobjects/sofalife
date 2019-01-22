@@ -63,7 +63,7 @@ public class LocationReaderTest {
 		Assert.assertEquals(2, reader.getLocation().getColumnNumber());
 		Assert.assertEquals(5, reader.getLocation().getCharacterOffset());
 	}
-	
+
 	@Test
 	public void testRead3() throws Exception {
 		LocationReader reader = new LocationReader(new StringReader("1\n2\n3"), null, null);
@@ -74,7 +74,7 @@ public class LocationReaderTest {
 		Assert.assertEquals(2, reader.getLocation().getColumnNumber());
 		Assert.assertEquals(5, reader.getLocation().getCharacterOffset());
 	}
-	
+
 	@Test
 	public void testRead4() throws Exception {
 		LocationReader reader = new LocationReader(new StringReader("1\r\n2\r\n3"), null, null);
