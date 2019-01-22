@@ -26,15 +26,15 @@ public class ByteOrderUtils {
 	static {
 		try {
 			UTF_32 = Charset.forName("UTF-32");
-		} catch (IllegalCharsetNameException|UnsupportedCharsetException e) {
+		} catch (IllegalCharsetNameException | UnsupportedCharsetException e) {
 		}
 		try {
 			UTF_32LE = Charset.forName("UTF-32LE");
-		} catch (IllegalCharsetNameException|UnsupportedCharsetException e) {
+		} catch (IllegalCharsetNameException | UnsupportedCharsetException e) {
 		}
 		try {
 			UTF_32BE = Charset.forName("UTF-32BE");
-		} catch (IllegalCharsetNameException|UnsupportedCharsetException e) {
+		} catch (IllegalCharsetNameException | UnsupportedCharsetException e) {
 		}
 	}
 

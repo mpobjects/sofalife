@@ -278,7 +278,7 @@ public class SpecLoader {
 		if (val == null) {
 			return;
 		}
-		
+
 		int[] multiplicity;
 		try {
 			multiplicity = parseMultiplicity(val);

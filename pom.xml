@@ -1,6 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.mpobjects</groupId>
+		<artifactId>mpo-oss-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 	<groupId>com.mpobjects.formats</groupId>
 	<artifactId>sofalife</artifactId>
 	<version>0.5.0-SNAPSHOT</version>
@@ -8,13 +13,33 @@
 	<description>Reader for Structured Fixed Length Formats.</description>
 	<url>https://github.com/mpobjects/sofalife</url>
 	<inceptionYear>2014</inceptionYear>
+
 	<organization>
 		<name>MP Objects</name>
 		<url>http://www.mp-objects.com</url>
 	</organization>
+
+	<developers>
+		<developer>
+			<name>Michiel Hendriks</name>
+			<email>michiel.hendriks@mp-objects.com</email>
+			<organization>MP Objects</organization>
+			<organizationUrl>http://www.mp-objects.com</organizationUrl>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
 	<scm>
 		<url>https://github.com/mpobjects/sofalife.git</url>
 		<connection>scm:git:https://github.com/mpobjects/sofalife.git</connection>
+		<developerConnection>scm:git:https://github.com/mpobjects/sofalife.git</developerConnection>
 	</scm>
 	<issueManagement>
 		<url>https://github.com/mpobjects/sofalife/issues</url>
@@ -26,52 +51,12 @@
 	</ciManagement>
 
 	<properties>
-		<java-version>1.7</java-version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<findbugs-version>3.0.5</findbugs-version>
-
-		<maven-surefire-plugin>2.20</maven-surefire-plugin>
-		<maven-javadoc-plugin>2.9.1</maven-javadoc-plugin>
-		<maven-compiler-plugin>3.6.1</maven-compiler-plugin>
 		<maven-bundle-plugin>3.3.0</maven-bundle-plugin>
-		<maven-source-plugin>3.0.1</maven-source-plugin>
-		<maven-jar-plugin>3.0.2</maven-jar-plugin>
-		<maven-toolchains-plugin>1.1</maven-toolchains-plugin>
 	</properties>
-
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-		</license>
-	</licenses>
 
 	<build>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>${maven-surefire-plugin}</version>
-					<inherited>true</inherited>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${maven-compiler-plugin}</version>
-					<inherited>true</inherited>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>${maven-javadoc-plugin}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>findbugs-maven-plugin</artifactId>
-					<version>${findbugs-version}</version>
-					<inherited>true</inherited>
-				</plugin>
 				<plugin>
 					<groupId>org.apache.felix</groupId>
 					<artifactId>maven-bundle-plugin</artifactId>
@@ -79,68 +64,9 @@
 					<extensions>true</extensions>
 					<inherited>true</inherited>
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>${maven-source-plugin}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-toolchains-plugin</artifactId>
-					<version>${maven-toolchains-plugin}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>${maven-jar-plugin}</version>
-				</plugin>
 			</plugins>
 		</pluginManagement>
-
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>${java-version}</source>
-					<target>${java-version}</target>
-					<debug>true</debug>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-					</archive>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
@@ -153,31 +79,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.7</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -230,120 +131,6 @@
 		</dependency>
 	</dependencies>
 
-	<profiles>
-		<profile>
-			<activation>
-				<jdk>1.6</jdk>
-			</activation>
-			<properties>
-				<findbugs-version>2.5.5</findbugs-version>
-				<maven-bundle-plugin>2.5.4</maven-bundle-plugin>
-			</properties>
-		</profile>
-		<profile>
-			<id>java6</id>
-			<activation>
-				<property>
-					<name>java-version</name>
-					<value>1.6</value>
-				</property>
-			</activation>
-			<properties>
-				<java-version>1.6</java-version>
-			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-toolchains-plugin</artifactId>
-						<executions>
-							<execution>
-								<goals>
-									<goal>toolchain</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<toolchains>
-								<jdk>
-									<version>1.6</version>
-								</jdk>
-							</toolchains>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>java7</id>
-			<activation>
-				<property>
-					<name>java-version</name>
-					<value>1.7</value>
-				</property>
-			</activation>
-			<properties>
-				<java-version>1.7</java-version>
-			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-toolchains-plugin</artifactId>
-						<executions>
-							<execution>
-								<goals>
-									<goal>toolchain</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<toolchains>
-								<jdk>
-									<version>1.7</version>
-								</jdk>
-							</toolchains>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>java8</id>
-			<activation>
-				<property>
-					<name>java-version</name>
-					<value>1.8</value>
-				</property>
-			</activation>
-			<properties>
-				<java-version>1.8</java-version>
-			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-toolchains-plugin</artifactId>
-						<executions>
-							<execution>
-								<goals>
-									<goal>toolchain</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<toolchains>
-								<jdk>
-									<version>1.8</version>
-								</jdk>
-							</toolchains>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -355,15 +142,4 @@
 		</repository>
 	</distributionManagement>
 
-	<developers>
-		<developer>
-			<name>Michiel Hendriks</name>
-			<email>michiel.hendriks@mp-objects.com</email>
-			<organization>MP Objects</organization>
-			<organizationUrl>http://www.mp-objects.com</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-		</developer>
-	</developers>
 </project>

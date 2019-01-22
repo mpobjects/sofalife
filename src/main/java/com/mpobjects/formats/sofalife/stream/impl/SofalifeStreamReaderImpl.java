@@ -104,6 +104,7 @@ public class SofalifeStreamReaderImpl implements SofalifeStreamReader {
 
 	/**
 	 * Get a suitable reader
+	 * 
 	 * @param aInputStream
 	 * @return
 	 * @throws SofalifeStreamException

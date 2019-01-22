@@ -29,6 +29,7 @@ public interface SofalifeStreamReader {
 
 	/**
 	 * Get the current location information
+	 * 
 	 * @return location
 	 */
 	Location getLocation();
@@ -62,7 +63,7 @@ public interface SofalifeStreamReader {
 	 * @return true if there is more to read
 	 */
 	boolean hasNext();
-	
+
 	/**
 	 * Return the next event
 	 *
