@@ -7,35 +7,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
+import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 
 import org.apache.commons.io.ByteOrderMark;
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.input.BOMInputStream;
 
 /**
  *
  */
 public class ByteOrderUtils {
-	private static Charset UTF_32;
+	private static final Charset UTF_32;
 
-	private static Charset UTF_32BE;
+	private static final Charset UTF_32BE;
 
-	private static Charset UTF_32LE;
+	private static final Charset UTF_32LE;
 
 	static {
-		try {
-			UTF_32 = Charset.forName("UTF-32");
-		} catch (IllegalCharsetNameException | UnsupportedCharsetException e) {
-		}
-		try {
-			UTF_32LE = Charset.forName("UTF-32LE");
-		} catch (IllegalCharsetNameException | UnsupportedCharsetException e) {
-		}
-		try {
-			UTF_32BE = Charset.forName("UTF-32BE");
-		} catch (IllegalCharsetNameException | UnsupportedCharsetException e) {
-		}
+		UTF_32 = createCharset("UTF-32");
+		UTF_32LE = createCharset("UTF-32LE");
+		UTF_32BE = createCharset("UTF-32BE");
 	}
 
 	private ByteOrderUtils() {
@@ -83,18 +74,17 @@ public class ByteOrderUtils {
 	 * @param aEncoding
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	static ByteOrderMark[] getByteOrderMarks(Charset aEncoding) {
 		if (aEncoding == null) {
 			return null;
 		}
-		if (Charsets.UTF_8.equals(aEncoding)) {
+		if (StandardCharsets.UTF_8.equals(aEncoding)) {
 			return new ByteOrderMark[] { ByteOrderMark.UTF_8 };
-		} else if (Charsets.UTF_16.equals(aEncoding)) {
+		} else if (StandardCharsets.UTF_16.equals(aEncoding)) {
 			return new ByteOrderMark[] { ByteOrderMark.UTF_16BE, ByteOrderMark.UTF_16LE };
-		} else if (Charsets.UTF_16BE.equals(aEncoding)) {
+		} else if (StandardCharsets.UTF_16BE.equals(aEncoding)) {
 			return new ByteOrderMark[] { ByteOrderMark.UTF_16BE };
-		} else if (Charsets.UTF_16LE.equals(aEncoding)) {
+		} else if (StandardCharsets.UTF_16LE.equals(aEncoding)) {
 			return new ByteOrderMark[] { ByteOrderMark.UTF_16LE };
 		} else if (UTF_32 != null && UTF_32.equals(aEncoding)) {
 			return new ByteOrderMark[] { ByteOrderMark.UTF_32BE, ByteOrderMark.UTF_32LE };
@@ -104,5 +94,13 @@ public class ByteOrderUtils {
 			return new ByteOrderMark[] { ByteOrderMark.UTF_32LE };
 		}
 		return null;
+	}
+
+	private static Charset createCharset(String aCode) {
+		try {
+			return Charset.forName(aCode);
+		} catch (IllegalCharsetNameException | UnsupportedCharsetException e) {
+			return null;
+		}
 	}
 }
